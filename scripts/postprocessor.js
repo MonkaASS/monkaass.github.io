@@ -71,6 +71,12 @@ if (checkCalc()){
 
     // Добавляем таблицы
     generateTables(data, deltas)
+
+    selectBar.innerHTML = ''
+    let bars = getBars(data);
+    for (let i of range(0, bars.length)){
+        selectBar.innerHTML += `<option value="${i + 1}">Стержень ${i + 1}</option>`
+    }
 }
 
 loadInCreator.onclick = () => {
