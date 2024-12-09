@@ -16,6 +16,10 @@ function saveCanvasMetaData(){
 
 
 function loadCanvasMetaData(){
+    if (localStorage.getItem('canvasMetaData') == undefined){
+        saveCanvasMetaData()
+    }
+    
     let canvasMetaData = JSON.parse(localStorage.getItem('canvasMetaData'))
     cHeight.value = canvasMetaData.height
     cWidth.value = canvasMetaData.width
