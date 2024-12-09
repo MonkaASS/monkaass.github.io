@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title> Вычисление </title>
+    <link rel="icon" href="../src/stankin.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/calc.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.19/jspdf.plugin.autotable.min.js"></script>
+
+    <script src="../src/fonts/TNR/tnr_b.js"> </script>
+    <script src="../src/fonts/TNR/tnr.js"> </script>
+
+    <script src="../scripts/pdfGenerator.js"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.0.0/math.js" integrity="sha512-Z4SWUL3xAVPPSOiBAYUjWdtZDmFU9mlM8CUJP+5PkU8qHUCA1uhI41Tzy+Znb6VeHFEM2+xcv+Hj8Ai4Hfs4CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body class="custom-body-dark">
+    <header class="d-flex justify-content-center py-3 custom-header-dark">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="../index.html" class="nav-link text-white-50 custom-scaler-animation">Главная</a></li>
+        <li class="nav-item"><a href="history.html" class="nav-link text-white-50 custom-scaler-animation">История вычислений</a></li>
+        <li class="nav-item"><a href="starred.html" class="nav-link text-white-50 custom-scaler-animation">Отмеченные вычисления</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link text-white-50 custom-scaler-animation">Справка</a></li>
+      </ul>
+    </header>
+    
+    <main>
+        <div class="container-fluid body" id="root">
+            <div class="starter-template text-white text-center m-3">
+                <h1 id="calcNameText">Вычисление №1</h1> 
+            </div>
+            <div class="d-flex justify-content-center text-center">
+                <div class="flex-column col-10">
+                    <button type="button" id="makePDF" class="btn btn-primary">Сгенерировать отчёт</button>
+
+                    <h4 class="text-white cursor-pointer mt-3" id="loadInCreator"> Загрузить в редактор </h4>
+                    <label class="form-label text-white">Высота</label>
+                    <input type="range" min="1" max="50000" class="form-range" id="cHeight" value="20" oninput = "reDraw()" onchange="saveCanvasMetaData()">
+                    
+                    <label class="form-label text-white">Ширина</label>
+                    <input type="range" class="form-range" id="cWidth" value="0" oninput = "reDraw()" onchange="saveCanvasMetaData()">
+                    
+                    
+                    <input class="form-check-input" type="checkbox" oninput="reDraw()" onchange="saveCanvasMetaData()" id="showFCheck">
+                    <label class="form-check-label text-white">
+                    Показать сосредоточенные силы
+                    </label>
+                
+                
+                    <input class="form-check-input ms-5" type="checkbox" oninput="reDraw()" onchange="saveCanvasMetaData()" id="showQCheck">
+                    <label class="form-check-label text-white">
+                    Показать распределенные нагрузки
+                    </label>
+                    <canvas class="align-self-stretch calc-canavas-border mb-4" id="calcCanvas"> </canvas>
+
+                    <div>
+                        <label class="text-white"> Эпюра Nx </label>
+                        <canvas id="epureNx"> </canvas>
+                    </div>
+
+                    <div>
+                        <label class="text-white"> Эпюра σx </label>
+                        <canvas id="epureSx"> </canvas>
+                    </div>
+
+                    <div>
+                        <label class="text-white"> Эпюра Ux </label>
+                        <canvas id="epureUx"> </canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center text-center">
+                <div class="flex-column col-7">
+                    <h4 class="text-white mt-3"> Подсчет стержня в точке </h4>
+                    
+                    <div class="input-group input-group-sm mb-3">
+                        <select class="form-select" aria-label="Default select example" id="selectBar">
+                            <option value="1">Стержень 1</option>
+                            <option value="2">Стержень 2</option>
+                            <option value="3">Стержень 3</option>
+                        </select>
+                        <input type="number" class="form-control ms-2 bg-dark text-white border-0" id="countInX" placeholder="x">
+                        <button class="btn btn-outline-secondary" type="button" id="countInXBtn">Ok</button>
+                    </div>
+                    <div class="d-flex justify-content-evenly" id="countInXDiv">
+                        <span class="h4 text-white"></span>
+                        <span class="h4 text-white"></span>
+                        <span class="h4 text-white"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center text-center">
+                <div class="flex-column col-7">
+                    <div class="text-white mt-5">
+                        <input class="form-check-input" type="checkbox" value="" onchange="regenerateTables()" id="maxS">
+                        <label class="form-check-label">
+                          Показать самые высокие нагрузки
+                        </label>
+                    </div>
+
+                    <label class="form-label text-white" id="pointNumberText">Колчиство точек: 10</label>
+                    <input type="range" min="5" max="20" class="form-range" onchange="regenerateTables()" id="tablePoints" value="10">
+
+                    <label class="form-label text-white" id="precText">Точность: 4</label>
+                    <input type="range" min="0" max="10" class="form-range" onchange="regenerateTables()" id="setPrecision" value="4">
+                </div>
+            </div>
+            <div class="d-flex justify-content-center text-center">
+                <div class="flex-column col-7" id="tableReportDiv">
+                    <h4 class="text-white mt-5"> Нагрузки в стержне 1 </h4>
+                    <table id="report-table" class="table mt-2 text-white">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">x</th>
+                                <th scope="col">Nx</th>
+                                <th scope="col">Ux</th>
+                                <th scope="col">σx</th>
+                                <th scope="col">[σ]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>0</td>
+                                <td>1.5</td>
+                                <td>0</td>
+                                <td>0.5</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>Thornton</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Larry the Bird</td>
+                                <td>Larry the Bird</td>
+                                <td>Larry the Bird</td>
+                                <td>Ahh</td>
+                                <td>@twitter</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        
+    </main>
+    
+    <script src="../scripts/localstorage.js"> </script>
+    <script src="../scripts/processor.js"> </script>
+    <script src="../scripts/canvas.js"> </script>
+    <script src="../scripts/postprocessor.js"> </script>
+</body>
+</html>

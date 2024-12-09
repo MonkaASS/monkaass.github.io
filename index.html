@@ -1,32 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>React App | Home</title>
-        
-        <link rel="stylesheet" href="css/header.css">
-        <link rel="stylesheet" href="css/mainboards.css">
-        <link rel="icon" href="imgs/favicon.ico">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
-    </head>
-    <body>
-        <header>
-            <div class="header-container">
-                <a href="#"><div class="back-to-main"> </div></a>
-            </div>
-        </header>
-        <main style="margin-top: 200px; margin-left: 60px">
-            <div class="main-container">
-                <div class="create-board">
-                    <h3 class="create-board-text"> Create a new board... </h3>
-                </div>
-                <!--<a>
-                    <div class="created-board">
-                       <h3 class="created-board-text"> asd </h3>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title> Главная </title>
+    <link rel="icon" href="src/stankin.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/preprocessor.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.0.0/math.js" integrity="sha512-Z4SWUL3xAVPPSOiBAYUjWdtZDmFU9mlM8CUJP+5PkU8qHUCA1uhI41Tzy+Znb6VeHFEM2+xcv+Hj8Ai4Hfs4CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body class="custom-body-dark">
+    <header class="d-flex justify-content-center py-3 custom-header-dark">
+        <ul class="nav nav-pills">
+          <li class="nav-item"><a href="index.html" class="nav-link text-white custom-scaler-animation">Главная</a></li>
+          <li class="nav-item"><a href="pages/history.html" class="nav-link text-white-50 custom-scaler-animation">История вычислений</a></li>
+          <li class="nav-item"><a href="pages/starred.html" class="nav-link text-white-50 custom-scaler-animation">Отмеченные вычисления</a></li>
+          <li class="nav-item"><a href="pages/about.html" class="nav-link text-white-50 custom-scaler-animation">Справка</a></li>
+        </ul>
+      </header>
+    
+    <main>
+        <div class="container-fluid body">
+            
+            <div class="row">
+                
+                <div class="col custom-div-dark m-3 scrollbar-div">
+                    
+                    <label class="form-label h4 text-white"> Узлы и стержни </label>                    
+                    <div>
+                        <label class="form-label h4 text-white">Стержни</label>
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="number" oninput="saveInputsData()" class="form-control ms-2 bg-dark text-white border-0" id="barsCountInput" placeholder="Количество стержней">
+                            <button class="btn btn-outline-secondary" type="button" id="setBarsBtn">Ok</button>
+                        </div>
+                        
+                        <div id="barsDiv">
+                            
+                        </div>
                     </div>
-                </a>-->
+                    
+                    <div>
+                        <label class="form-label h4 text-white">Классы стержней</label>
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="number" oninput="saveInputsData()" class="form-control ms-2 bg-dark text-white border-0" id="barsClassesCountInput" placeholder="Количество классов стержней">
+                            <button class="btn btn-outline-secondary" type="button" id="setBarsClassesBtn">Ok</button>
+                        </div>
+
+                        <div id="barsClassesDiv">
+                            
+                        </div>
+                    </div>
+                    
+                    <label class="form-label h4 text-white"> Опоры, силы и нагрузки </label>
+                    <div>
+                        <label class="form-label h4 text-white">Опоры</label>
+                        <div class="input-group mb-3">
+                            <input class="form-check-input ms-5" oninput="saveInputsData()" type="checkbox" id="leftSupport">
+                            <label class="form-check-label text-white ms-2">
+                                Левая опора
+                            </label>
+                            <input class="form-check-input ms-5" oninput="saveInputsData()" type="checkbox" id="rightSupport">
+                            <label class="form-check-label text-white ms-2">
+                                Правая опора
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="form-label h4 text-white">Сосредоточенные силы</label>
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="number" oninput="saveInputsData()" class="form-control ms-2 bg-dark text-white border-0" id="FsCountInput" placeholder="Количество сосредоточенных сил">
+                            <button class="btn btn-outline-secondary" type="button" id="setFsBtn">Ok</button>
+                        </div>
+                        
+                        <div id="FsDiv">
+                            
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="form-label h4 text-white">Распределенные нагрузки</label>
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="number" oninput="saveInputsData()" class="form-control ms-2 bg-dark text-white border-0" id="QsCountInput" placeholder="Количество распределенных нагрузок">
+                            <button class="btn btn-outline-secondary" type="button" id="setQsBtn">Ok</button>
+                        </div>
+                        
+                        <div id="QsDiv">
+                            
+                        </div>
+                    </div>
+                    <div>
+                        <label class="form-label h4 text-white">Расчет и отрисовка</label>
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="text" maxlength="40" class="form-control ms-2 bg-dark text-white border-0" id="calcNameText" placeholder="Название">
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label text-white cursor-pointer" id="drawSchemeBtn"> Отрисовать </label>
+                        <label class="form-label text-white ms-3 cursor-pointer" id="processBtn"> Рассчитать </label>
+                    </div>
+                    <div>
+                        <label class="form-label text-white ms-3 cursor-pointer" id="clearAll"> Очистить </label>
+                    </div>
+                </div>
+                <div class="col-9 custom-div-dark p-5 m-3 d-flex text-center justify-content-center">
+                    <div class="flex-column">
+                        
+                        <label class="form-label text-white">Высота</label>
+                        <input type="range" min="1" max="50000" class="form-range" id="cHeight" value="20" oninput = "reDraw()" onchange="saveCanvasMetaData()">
+                        
+                        
+                        <label class="form-label text-white">Ширина</label>
+                        <input type="range" class="form-range" id="cWidth" value="0" oninput = "reDraw()" onchange="saveCanvasMetaData()">
+                        
+                        
+                        <input class="form-check-input" type="checkbox" oninput="reDraw()" onchange="saveCanvasMetaData()" id="showFCheck">
+                          <label class="form-check-label text-white">
+                           Показать сосредоточенные силы
+                          </label>
+                        
+                        
+                          <input class="form-check-input ms-5" type="checkbox" oninput="reDraw()" onchange="saveCanvasMetaData()" id="showQCheck">
+                          <label class="form-check-label text-white">
+                            Показать распределенные нагрузки
+                          </label>
+                        
+                        
+                        <canvas class="align-self-stretch main-canavas-border" id="mainCanvas"> </canvas>
+                        
+                        <div class="mb-3">
+                            <label class="form-label text-white">Загрузить с файла</label>
+                          <input class="form-control custom-div-dark text-white file-input" accept=".json, .txt" type="file" id="uploadFile">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-white cursor-pointer" id="saveAsFile">Сохранить в файл</label>
+                        </div>
+                        
+                    </div>
+                </div>
+                
             </div>
-        </main>
-        <script src="js/boardCreating.js"></script>
-    </body>
+            
+        </div>
+        
+    </main>
+
+    <script src="scripts/canvas.js"> </script>
+    <script src="scripts/localstorage.js"> </script>
+    <script src="scripts/processor.js"> </script>
+    <script src="scripts/preprocessor.js"> </script>
+</body>
 </html>

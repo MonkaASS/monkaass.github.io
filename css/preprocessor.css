@@ -1,0 +1,26 @@
+.main-canavas-border{
+    border: 1px solid #f2f2f2;
+    width: 80%
+}
+
+.scrollbar-div{
+    text-align: center;
+    max-height: 700px;
+    overflow-y: scroll
+}
+
+.scrollbar-div::-webkit-scrollbar {
+    width: 12px;
+}
+
+.scrollbar-div::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: #3E3D3B;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+}
+
+.scrollbar-div::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #363636;
+    border: 1px solid #cacaca;
+}

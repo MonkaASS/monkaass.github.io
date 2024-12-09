@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title> История вычислений </title>
+    <link rel="icon" href="../src/stankin.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/main.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body class="custom-body-dark">
+    <header class="d-flex justify-content-center py-3 custom-header-dark">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="../index.html" class="nav-link text-white-50 custom-scaler-animation">Главная</a></li>
+        <li class="nav-item"><a href="history.html" class="nav-link text-white custom-scaler-animation">История вычислений</a></li>
+        <li class="nav-item"><a href="starred.html" class="nav-link text-white-50 custom-scaler-animation">Отмеченные вычисления</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link text-white-50 custom-scaler-animation">Справка</a></li>
+      </ul>
+    </header>
+    
+    <main>
+        <div class="container-fluid body" id="root">
+            <div class="starter-template text-white text-center m-3">
+                <h1>Вычисления</h1>
+            </div>
+            <div class="d-flex justify-content-center text-center mb-3 text-white">
+                <div class="flex-column col-10" id="historyDiv">
+                    <div class="p-2 bd-highlight"><a class="text-white" style="text-decoration: none;" href="calculation.html?calc=a"> <h4> a </h4> </a></div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center text-center mb-3 text-white">
+                <div class="flex-column col-10 mt-5">
+                    <h4 class="cursor-pointer" id="loadMore"> Загрузить ещё </h4>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+    
+    <script src="../scripts/localstorage.js"> </script>
+    <script src="../scripts/history.js"> </script>
+</body>
+</html>

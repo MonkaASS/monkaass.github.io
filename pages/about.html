@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title> Справка </title>
+    <link rel="icon" href="../src/stankin.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/main.css">
+
+    
+</head>
+<body class="custom-body-dark">
+    <header class="d-flex justify-content-center py-3 custom-header-dark">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="../index.html" class="nav-link text-white-50 custom-scaler-animation">Главная</a></li>
+        <li class="nav-item"><a href="history.html" class="nav-link text-white-50 custom-scaler-animation">История вычислений</a></li>
+        <li class="nav-item"><a href="starred.html" class="nav-link text-white-50 custom-scaler-animation">Отмеченные вычисления</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link text-white custom-scaler-animation">Справка</a></li>
+      </ul>
+    </header>
+    
+    <main>
+      
+        <div class="container-fluid body">
+          <div class="d-flex justify-content-center text-left">
+            <div class="flex-column col-10">
+              <div class="starter-template text-white text-left m-3">
+                <h1 class="text-center">Справка. Проект "САПР"</h1>
+                <h4 class="text-center"> Проект "САПР". Автор: студент группы ИДБ-22-10 Наумов Даниил Алексеевич, обучающийся ФГБОУ "МГТУ Станкин"</h4>
+                <p class="lead text-center"> Разработка проводилась по техническому заданию (<a href="../src/ТЗ_САПР.pdf"> ссылка на ТЗ </a>)</p>
+
+                <h4 class="text-center"> Соответвствие ТЗ </h4>
+                
+                <p class="lead"> 1. Конструкция представляет собой плоскую стержневую систему, можно задать длину,
+                  площадь поперечного сечения, модуль упругости, допускаемое напряжение. </p>
+                <p class="lead"> 2. Можно добавлять опоры с одной из или обеих сторон стержневой системы, также можно добавлять продольные
+                  поперечные нагрузки </p>
+                <p class="lead"> 3. Происходит решение задачи </p>
+                <p class="lead"> 4. Так как проект реализован в виде веб-приложения, то оно доступно на любой системе, которая может
+                  работать с гипертекстом. Гарантируется поддержка браузеров на основе Chromium, также многие остальные браузеры поддерживаются с большой вероятностью</p>
+                  
+                  <p class="lead"> 5. Препроцессор, процессор и постпроцессор </p>
+                  <p class="lead"> 5.1 Препроцессор системы обеспечивает возможность ввода данных с
+                    помощью файла или вручную на <a href="../index.html"> главной </a> странице, конструкцию можно визуализировать, при неверном заполнении
+                  указываются ошибки. Финальную версию конструкции можно сохранить в файл. Заполненные данные конструкции сохраняются при перезагрузке страницы. </p>
+                  <p class="lead"> 5.2 Процессор производит расчеты, позволяет посчитать продольные силы, нормальные напряжения, перемещения </p>
+                  <p class="lead"> 5.3 Постпроцессор составляет анализ расчетов: эпюры расчета, таблицы напряжений, расчет значения в отдельном элементе стержня, генерация файла результатов расчета </p>
+                
+                  <h4 class="text-center"> Краткая инструкция по использованию </h4>
+                    <p class="lead"> Значения вводятся в соответсвующие поля на главной странице, если что-то введено неверно, уведомление об этом можно видеть в 
+                      холсте для отображения схемы. Как только всё будет введено верно, схема отобразится. В крайних случаях можно воспользоваться кнопкой "Отрисовать",
+                      которая находится внизу левой панели.
+                    </p>
+                    <p class="lead"> Когда ввод окончен, можно приступать к расчету, нажав кнопку Рассчитать. После нажатия вас перекинет на страницу расчета, где можно посмотреть
+                      все нужные результаты или сгенерировать по ним отчет.
+                    </p>
+                    <p class="lead">
+                      Все результаты сохраняются в <a href="history.html">историю вычислений </a>. К любому расчету можно вернуться в любой момент, а при необходимости можно загрузить отчет в редактор
+                      на главной странице. Расчет также можно отметить и найти его на отдельной странице <a href="starred.html">отмеченные вычисления</a>.
+                    </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+    </main>
+</body>
+</html>

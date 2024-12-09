@@ -1,0 +1,51 @@
+.custom-body-dark{
+    background: #262626;
+}
+
+.custom-header-dark{
+    background-color: #3E3D3B;
+}
+.custom-div-dark{
+    background-color: #3E3D3B;
+}
+
+.custom-scaler-animation{
+    transition: .3s;
+}
+
+.custom-scaler-animation:hover{
+    transform: scale(1.1);
+}
+
+.file-input{
+    border: None
+}
+.file-input:hover{
+    background-color: #3E3D3B;
+    border: None
+}
+.file-input:active{
+    background-color: #3E3D3B;
+    border: None
+}
+.file-input:focus{
+    background-color: #3E3D3B;
+    border: None
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+/* Убирает стрелочки в input type=number в разных браузерах */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
