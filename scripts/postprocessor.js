@@ -218,7 +218,7 @@ function generateTables(data, _deltas, N = 10, showOnlyMax=false){
 
     
     for (let bar of range(0, bars.length)){        
-        tableReportDiv.innerHTML += `<h4 class="text-white mt-5"> Нагрузки в стержне ${bar + 1} </h4>`
+        tableReportDiv.innerHTML += `<h4 class="text-white mt-5"> Расчетная таблица для стержня ${bar + 1} </h4>`
         let table = document.createElement('table')
         table.className = 'table mt-2 text-white'
         table.setAttribute('name', 'report-table')
@@ -236,19 +236,49 @@ function generateTables(data, _deltas, N = 10, showOnlyMax=false){
         let tbody = document.createElement('tbody')
         if (!showOnlyMax){
             for (let i of range(0, xs[bar].length)){
-                tbody.innerHTML += `<tr>
-                    <th scope="row">${i + 1}</th>
-                    <td>${xs[bar][i]}</td>
-                    <td>${Nxs[bar][i]}</td>
-                    <td>${Uxs[bar][i]}</td>
-                    <td>${Sxs[bar][i]}</td>
-                    <td>${Sp[bar]}</td>
-                </tr>`
+                if (math.abs(Sxs[bar][i]) > math.abs(Sp[bar])){
+                    tbody.innerHTML += `<tr class="table-warning">
+                        <th scope="row">${i + 1}</th>
+                        <td>${xs[bar][i]}</td>
+                        <td>${Nxs[bar][i]}</td>
+                        <td>${Uxs[bar][i]}</td>
+                        <td>${Sxs[bar][i]}</td>
+                        <td>${Sp[bar]}</td>
+                    </tr>`
+                }
+                else{
+                    tbody.innerHTML += `<tr>
+                        <th scope="row">${i + 1}</th>
+                        <td>${xs[bar][i]}</td>
+                        <td>${Nxs[bar][i]}</td>
+                        <td>${Uxs[bar][i]}</td>
+                        <td>${Sxs[bar][i]}</td>
+                        <td>${Sp[bar]}</td>
+                    </tr>`
+                }
             }
         }
         else{
             let items = [Sxs[bar].findIndex((el) => el >= math.max(Sxs[bar])), Sxs[bar].findIndex((el) => el <= math.min(Sxs[bar]))]
-            for (i of items){
+            let i = 0
+            if (math.abs(Sxs[bar][items[0]]) > math.abs(Sxs[bar][items[1]])){
+                i = items[0]
+            }
+            else{
+                i = items[1]
+            }
+            // for (i of items){
+            if (math.abs(Sxs[bar][i]) > math.abs(Sp[bar])){
+                tbody.innerHTML += `<tr class="table-warning">
+                    <th scope="row">${i + 1}</th>
+                    <td>${xs[bar][i]}</td>
+                    <td>${Nxs[bar][i]}</td>
+                    <td>${Uxs[bar][i]}</td>
+                    <td>${Sxs[bar][i]}</td>
+                    <td>${Sp[bar]}</td>
+                </tr>`
+            }
+            else{
                 tbody.innerHTML += `<tr>
                     <th scope="row">${i + 1}</th>
                     <td>${xs[bar][i]}</td>
@@ -258,6 +288,7 @@ function generateTables(data, _deltas, N = 10, showOnlyMax=false){
                     <td>${Sp[bar]}</td>
                 </tr>`
             }
+            // }
         }
         
         tableReportDiv.appendChild(table)
@@ -408,8 +439,13 @@ function readTable(table){
 
     for (let tr of table.querySelector('tbody').children){
         let tmpData = []
-        for (let child of tr.children){
-            tmpData.push(child.innerHTML)
+        for (let child of range(0, tr.children.length)){
+            if (child == 4 && math.abs(parseFloat(tr.children[child].innerHTML)) > math.abs(parseFloat(tr.children[child + 1].innerHTML))){
+                tmpData.push(tr.children[child].innerHTML + '*')
+            }
+            else{
+                tmpData.push(tr.children[child].innerHTML)
+            }
         }
         body.push(tmpData)
     }
